@@ -109,6 +109,26 @@ int X3mMultipication(){
         }
         cout << endl;
     }
+
+    // Matrix multiplication logic
+    for (int i = 0; i < SIZE; ++i) {
+        for (int j = 0; j < SIZE; ++j) {
+            matrixX[i][j] = 0;
+            for (int k = 0; k < SIZE; ++k) {
+                matrixX[i][j] += matrixA[i][k] * matrixB[k][j];
+            }
+        }
+    }
+
+    // Output matrixX
+    cout << "\nMatrix X (A x B):\n";
+    for (int i = 0; i < SIZE; ++i) {
+        for (int j = 0; j < SIZE; ++j) {
+            cout << matrixX[i][j] << "  ";
+        }
+        cout << endl;
+    }
+
     return 0;
 }
 
