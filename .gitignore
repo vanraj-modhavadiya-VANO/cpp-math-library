@@ -1,0 +1,15 @@
+# C++ default
+*.o
+*.obj
+*.exe
+*.out
+*.gch
+*.pch
+*.log
+
+# VS Code
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
