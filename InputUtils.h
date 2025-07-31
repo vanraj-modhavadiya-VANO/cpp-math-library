@@ -5,21 +5,49 @@
 #include <string>
 #include <limits>
 #include <cctype>
+#include <sstream>
 
 namespace InputUtils {
 
     // Prompt the user for an integer with validation
-    inline int getInt(const std::string& prompt = "Enter an integer: ") {
+    inline int getInt(
+            const std::string& prompt = "Enter an integer: ",
+            int min = std::numeric_limits<int>::min(),
+            int max = std::numeric_limits<int>::max(),
+            bool allowDefault = false,
+            int defaultValue = 0,
+            const std::string& errorMsg = "Invalid input. Please enter a valid integer."
+    ){
+        std::string line;
         int value;
-        while (true) {
+
+        while (true)
+        {
             std::cout << prompt;
-            if (std::cin >> value) {
-                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-                return value;
+
+            if(allowDefault){
+                std::cout << " [" << defaultValue <<"]";
             }
-            std::cin.clear();
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            std::cout << "Invalid input. Try again.\n";
+            
+            std::cout << ": ";
+            std::getline(std::cin, line);
+
+            // Use default if input is empty and default is allowed
+            if(allowDefault && line.empty()){
+                return defaultValue;
+            }
+
+            std::istringstream iss(line);
+            if(iss >> value && iss.eof()){
+                if(value >= min && value <= max){
+                    return value;
+                } else {
+                    std::cout << "Input must be between " << min << " and " << max << ".\n";
+                    continue;
+                }
+            }
+
+            std::cout << errorMsg << std::endl;
         }
     }
 

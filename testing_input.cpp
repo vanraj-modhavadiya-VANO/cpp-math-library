@@ -1,6 +1,7 @@
 #include "InputUtils.h"
 
 int main() {
+    /*
     // Get an integer
     int myInt = InputUtils::getInt("Enter an integer: ");
     std::cout << "You entered: " << myInt << "\n\n";
@@ -27,6 +28,21 @@ int main() {
 
     // Wait for enter
     InputUtils::waitForEnter("Press Enter to exit...");
+
+    */
+
+    std::cout << "--- Testing getInt() with all parameters ---\n";
+
+    int result = InputUtils::getInt(
+        "Enter a number between 10 and 50", // prompt
+        10,                                 // min
+        50,                                 // max
+        true,                               // allowDefault
+        25,                                 // defaultValue
+        "Oops! That wasn't a valid integer." // custom error message
+    );
+
+    std::cout << "Final value: " << result << "\n";
 
     return 0;
 }
